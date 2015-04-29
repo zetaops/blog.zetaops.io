@@ -48,8 +48,17 @@ config = {
     // When running Ghost in the wild, use the production environment
     // Configure your URL and mail settings here
     production: {
-        url: 'http://'+process.env.OPENSHIFT_APP_DNS,
-        mail: {},
+      url: 'http://'+process.env.OPENSHIFT_APP_DNS,
+      mail: {
+              transport: 'SMTP',
+              options: {
+                service: 'Mailgun',
+                auth: {
+                    user: 'postmaster@sandbox3ba96916ca1a4a598a04610e77dba5e5.mailgun.org', // mailgun username
+                    pass: 'e471965d4bed3e705409dbef67818dbf'  // mailgun password
+                }
+            }
+        },
         database: {
             client: 'sqlite3',
             connection: {
